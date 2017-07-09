@@ -36,16 +36,22 @@
 
 - (NSUInteger)startBackgroundTaskWithName:(NSString *)name completion:(void(^)())completion
 {
+    UIApplication *sharedApplication;
+#ifndef MATRIX_SDK_APP_EXTENSIONS
+    sharedApplication = [UIApplication sharedApplication];
+#endif
     if (name)
     {
-        return [[UIApplication sharedApplication] beginBackgroundTaskWithName:name expirationHandler:completion];
+        return [sharedApplication beginBackgroundTaskWithName:name expirationHandler:completion];
     }
-    return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+    return [sharedApplication beginBackgroundTaskWithExpirationHandler:nil];
 }
 
 - (void)endBackgrounTaskWithIdentifier:(NSUInteger)identifier
 {
+#ifndef MATRIX_SDK_APP_EXTENSIONS
     [[UIApplication sharedApplication] endBackgroundTask:identifier];
+#endif
 }
 
 @end

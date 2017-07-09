@@ -21,7 +21,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.10"
 
   s.source       = { :git => "https://github.com/matrix-org/matrix-ios-sdk.git", :tag => "v0.8.2" }
-  s.source_files = "MatrixSDK", "MatrixSDK/**/*.{h,m}"
   s.resources    = "MatrixSDK/Data/Store/MXCoreDataStore/*.xcdatamodeld"
 
   s.frameworks   = "CoreData"
@@ -30,5 +29,17 @@ Pod::Spec.new do |s|
 
   s.dependency 'AFNetworking', '~> 3.1.0'
   s.dependency 'GZIP', '~> 1.1.1'
+
+  s.default_subspec = 'Core'
+  
+  s.subspec 'Core' do |core|
+    core.source_files = "MatrixSDK", "MatrixSDK/**/*.{h,m}"
+  end
+
+  s.subspec 'AppExtension' do |ext|
+    ext.source_files = "MatrixSDK", "MatrixSDK/**/*.{h,m}"
+    #For app extensions, disabling code paths using unavailable API
+    ext.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'MATRIX_SDK_APP_EXTENSIONS=1' }
+  end
 
 end
