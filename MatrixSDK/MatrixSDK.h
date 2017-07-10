@@ -25,6 +25,7 @@ FOUNDATION_EXPORT NSString *MatrixSDKVersion;
 #import "MXRestClient.h"
 #import "MXSession.h"
 #import "MXError.h"
+#import "UIApplication+MatrixSDK.h"
 
 #import "MXStore.h"
 #import "MXNoStore.h"

@@ -37,9 +37,10 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'AppExtension' do |ext|
-    ext.source_files = "MatrixSDK", "MatrixSDK/**/*.{h,m}"
+    ext.dependency 'MatrixSDK/Core'
+
     #For app extensions, disabling code paths using unavailable API
-    ext.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'MATRIX_SDK_APP_EXTENSIONS=1' }
+    ext.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'MX_APP_EXTENSIONS=1' }
   end
 
 end
